@@ -50,7 +50,7 @@ public class Graf {
 	
 	public void odstraniTocko(Tocka T) {
 		for (Tocka U : T.sosedi) U.sosedi.remove(T);
-		rocke.remove(T);
+		tocke.remove(T);
 	}
 	
 	private Tocka[] dodajTocke(int n) {
@@ -68,25 +68,25 @@ public class Graf {
 	}
 	
 	public static Graf cikel(int n) {
-		Graf graf = new Grag();
-		Tocke[] tocke = graf.dodajTocke(n);
-		for (i = 0; i < n-1; i++) graf.dodajPovezavo(tocke[i], tocke[(i + 1) % n]);
+		Graf graf = new Graf();
+		Tocka[] tocke = graf.dodajTocke(n);
+		for (int i = 0; i < n; i++) graf.dodajPovezavo(tocke[i], tocke[(i + 1) % n]);
 		return graf;
 	}
 	
-	public static Graf ponl(int n) {
-		Graf graf = new Grag();
-		Tocke[] tocke = graf.dodajTocke(n);
-		for (i = 0; i < n; i++) {
-			for (j = i + 1; j < n; j++) graf.dodajPovezavo(tocke[i], tocke[j]);
+	public static Graf poln(int n) {
+		Graf graf = new Graf();
+		Tocka[] tocke = graf.dodajTocke(n);
+		for (int i = 0; i < n; i++) {
+			for (int j = i + 1; j < n; j++) graf.dodajPovezavo(tocke[i], tocke[j]);
 		}
 		return graf;
 	}
 	
 	public static Graf polnDvodelen(int n, int m) {
-		Graf graf = new Grag();
-		Tocke[] tocke1 = graf.dodajTocke(n);
-		Tocke[] tocke2 = graf.dodajTocke(m);
+		Graf graf = new Graf();
+		Tocka[] tocke1 = graf.dodajTocke(n);
+		Tocka[] tocke2 = graf.dodajTocke(m);
 		for (Tocka T1 : tocke1) {
 			for (Tocka T2 : tocke2) graf.dodajPovezavo(T1, T2);
 		}
@@ -94,9 +94,9 @@ public class Graf {
 	}
 	
 	public void izpis() {
-		for (Tocka T : tocke.values) {
+		for (Tocka T : tocke.values()) {
 			System.out.print(T + ":");
-			for (Tocka U : T.sosedje) System.out.print(" " + U);
+			for (Tocka U : T.sosedi) System.out.print(" " + U);
 			System.out.println();
 		}
 	}
