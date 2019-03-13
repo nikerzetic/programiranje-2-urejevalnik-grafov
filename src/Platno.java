@@ -11,6 +11,7 @@ public class Platno extends JPanel {
 	Color barvaTocke;
 	Color barvaPovezave;
 	Color barvaRoba;
+	Color barvaOzadja;
 	double polmerTocke;
 	float debelinaPovezave;
 	float debelinaRoba;
@@ -20,9 +21,10 @@ public class Platno extends JPanel {
 		this.visina = visina;
 		graf = null;
 		barvaTocke = Color.WHITE;
-		barvaPovezave = Color.RED;
+		barvaPovezave = Color.ORANGE;
 		barvaRoba = Color.BLACK;
-		polmerTocke = 5;
+		barvaOzadja = Color.GRAY;
+		polmerTocke = 4;
 		debelinaPovezave = 2;
 		debelinaRoba = 1;
 	}
@@ -41,7 +43,9 @@ public class Platno extends JPanel {
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D)g;
 		super.paintComponent(g);
-		if (g == null) return;
+		if (graf == null) return;
+		
+		setBackground(barvaOzadja);
 		
 		g.setColor(barvaPovezave);
 		g2.setStroke(new BasicStroke(debelinaPovezave));
