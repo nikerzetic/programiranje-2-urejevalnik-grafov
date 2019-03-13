@@ -50,7 +50,7 @@ public class Graf {
 	
 	public void odstraniTocko(Tocka T) {
 		for (Tocka U : T.sosedi) U.sosedi.remove(T);
-		tocke.remove(T);
+		tocke.remove(T.ime);
 	}
 	
 	private Tocka[] dodajTocke(int n) {
@@ -98,6 +98,17 @@ public class Graf {
 			System.out.print(T + ":");
 			for (Tocka U : T.sosedi) System.out.print(" " + U);
 			System.out.println();
+		}
+	}
+	
+	public void razporedi(double x, double y, double r) {
+		int n = tocke.size();
+		int i = 0;
+		for (Tocka T : tocke.values()) {
+			double kot = 2 * Math.PI * i / n;
+			T.x = x + r * Math.cos(kot);
+			T.y = y + r * Math.sin(kot);
+			i++;
 		}
 	}
 	
