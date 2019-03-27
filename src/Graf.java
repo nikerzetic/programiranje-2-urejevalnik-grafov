@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class Graf {
 	
@@ -112,4 +113,59 @@ public class Graf {
 		}
 	}
 	
+	public void shrani(String ime) {
+		try {
+			PrintWriter dat = new PrintWriter(new FileWriter(ime));
+			for (Tocka T: tocke.values()) {
+				dat.println(T + ": " + T.x + " " +  T.y);
+			}
+			dat.println("*************");
+			for (Tocka T: tocke.values()) {
+				dat.print(T + ":");
+				for (Tocka U: T.sosedi) dat.print(" " + U);
+				dat.println();
+			}
+			dat.close();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static Graf preberi(String ime) {
+		try {
+			BufferedReader dat = new BufferedReader(new FileReader(ime));
+			Graf graf = new Graf();
+			boolean stikalo = true;
+			while (dat.ready()) {
+				String vrstica = dat.readLine().trim();
+				if (vrstica.equals("")) continue;
+				if (vrstica.equals("*************")) {
+					stikalo = false;
+				}
+				else if (stikalo) {
+					String[] podatki = vrstica.split("[ :]+");
+					Tocka T = new Tocka(podatki[0]);
+					T.x = Double.parseDouble(podatki[1]);
+					T.y = Double.parseDouble(podatki[2]);
+				}
+				else {
+					String[] podatki = vrstica.split("[ :]+");
+					Tocka T = graf.tocka(podatki[0]);
+					if (T == null) T = graf.dodajTocko(podatki[0]);
+					for (int i = 1; i < podatki.length; i++) {
+						Tocka U = graf.tocka(podatki[i]);
+						if (U == null) U = graf.dodajTocko(podatki[i]);
+						graf.dodajPovezavo(T, U);
+					}
+				}
+			}
+			dat.close();
+			return graf;
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
