@@ -37,9 +37,9 @@ public class Platno extends JPanel implements MouseListener, MouseMotionListener
 		barvaOzadja = Color.GRAY;
 		barvaIzbraneTocke = Color.YELLOW;
 		barvaAktivneTocke = Color.MAGENTA;
-		polmerTocke = 4;
+		polmerTocke = 6;
 		debelinaPovezave = 2;
-		debelinaRoba = 1;
+		debelinaRoba = 4;
 		
 		addMouseListener(this);
 		addMouseMotionListener(this);
@@ -78,20 +78,17 @@ public class Platno extends JPanel implements MouseListener, MouseMotionListener
 		
 		
 		for (Tocka T : graf.tocke.values()) {
+			g.setColor(barvaRoba);
 			int polmer = round(polmerTocke);
+			g2.setStroke(new BasicStroke(debelinaRoba));
+			g.drawOval(round(T.x) - polmer, round(T.y) - polmer, 2 * polmer, 2 * polmer);
+			
+			polmer = round(polmerTocke);
 			if (T == aktivnaTocka) g.setColor(barvaAktivneTocke);
 			else if (izbraneTocke.contains(T)) g.setColor(barvaIzbraneTocke);
 			else g.setColor(barvaTocke);
 			g.fillOval(round(T.x) - polmer, round(T.y) - polmer, 2 * polmer, 2 * polmer);
 		}
-		
-		g.setColor(barvaRoba);
-		
-		for (Tocka T : graf.tocke.values()) {
-			int polmer = round(debelinaRoba) + round(polmerTocke);
-			g.drawOval(round(T.x) - polmer, round(T.y) - polmer, 2 * polmer, 2 * polmer);
-		}
-		
 		
 	}
 	

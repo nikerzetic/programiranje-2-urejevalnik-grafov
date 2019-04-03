@@ -145,7 +145,7 @@ public class Graf {
 				}
 				else if (stikalo) {
 					String[] podatki = vrstica.split("[ :]+");
-					Tocka T = new Tocka(podatki[0]);
+					Tocka T = graf.dodajTocko(podatki[0]);
 					T.x = Double.parseDouble(podatki[1]);
 					T.y = Double.parseDouble(podatki[2]);
 				}
